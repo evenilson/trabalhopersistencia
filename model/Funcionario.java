@@ -1,5 +1,6 @@
-package br.ufc.qxd.model;
+package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,8 @@ import javax.persistence.*;
 	@NamedQuery(name="Funcionario.findAll", query="from Funcionario"),
 
 })
-public abstract class Funcionario {
+public  class Funcionario implements Serializable {
+	 private static final long serialVersionUID = -1905907502453138175L;
 	@Id  
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="funcionario_id")
@@ -30,7 +32,7 @@ public abstract class Funcionario {
 	@ManyToMany(mappedBy="Funcionario")
 	private Endereco endereco;
 	private int numeroDepartamento;
-	//@OneToMany(mappedBy="funcionario", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "Funcionario", cascade = CascadeType.ALL)
 	private List<Dependentes> dependentes;
 
 	public Funcionario() {

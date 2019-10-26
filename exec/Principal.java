@@ -1,4 +1,4 @@
-package br.ufc.qxd.exec;
+package br.ufc.qxd.persistencia.trabalho_02_jpa.exec;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -6,7 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
-import br.ufc.qxd.model.Departamento;
+import br.ufc.qxd.persistencia.trabalho_02_jpa.model.Departamento;
 
 public class Principal {
 

@@ -1,4 +1,4 @@
-package br.ufc.qxd.model;
+package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
 import java.util.Date;
 import java.util.List;

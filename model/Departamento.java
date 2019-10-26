@@ -1,4 +1,4 @@
-package br.ufc.qxd.model;
+package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
 import java.util.List;
 
@@ -21,8 +21,8 @@ import javax.persistence.Table;
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idDepa;
 	private String nome;
-	//@OneToMany(mappedBy = "Funcionario")
-	//private List<Funcionario> funcionarios;
+	@OneToMany(mappedBy = "Funcionario")
+	private List<Funcionario> funcionarios;
 	//private List<Projetos> projetos;
 	
 	public Departamento() {

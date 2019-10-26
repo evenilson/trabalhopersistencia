@@ -1,4 +1,4 @@
-package br.ufc.qxd.dao;
+package br.ufc.qxd.persistencia.trabalho_02_jpa.dao;
 
 import java.util.List;
 

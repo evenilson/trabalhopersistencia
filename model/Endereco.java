@@ -1,15 +1,13 @@
-package br.ufc.qxd.model;
+package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.*;
+
 
 @Entity
 public class Endereco {
@@ -23,18 +21,8 @@ public class Endereco {
 	private String cidade;
 	private String bairro;
 	private String estado;
-
 	@ManyToOne
-	@JoinTable(
-			name="contato_endereco",
-			joinColumns=
-			@JoinColumn(name="endereco_id", 
-			referencedColumnName="endereco_id"),
-			inverseJoinColumns =
-			@JoinColumn(name="funcionario_id", 
-			referencedColumnName="funcionario_id")
-			)
-	private List<Funcionario> funcionario;
+	private Funcionario funcionario;
 
 	public Endereco() {
 
@@ -48,7 +36,7 @@ public class Endereco {
 
 
 
-	public Endereco(int id, String rua, int numeroCasa, String cidade, String bairro, String estado,List<Funcionario> funcionario) {
+	public Endereco(int id, String rua, int numeroCasa, String cidade, String bairro, String estado,Funcionario funcionario) {
 		this.id = id;
 		this.rua = rua;
 		this.numeroCasa = numeroCasa;
@@ -132,13 +120,13 @@ public class Endereco {
 
 
 
-	public List<Funcionario> getFuncionario() {
+	public Funcionario getFuncionario() {
 		return funcionario;
 	}
 
 
 
-	public void setFuncionario(List<Funcionario> funcionario) {
+	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
 

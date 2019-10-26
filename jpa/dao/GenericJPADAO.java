@@ -1,8 +1,8 @@
-package br.ufc.qxd.dao.jpa;
+package br.ufc.qxd.persistencia.trabalho_02_jpa.jpa.dao;
 
 import java.util.List;
 
-import br.ufc.qxd.dao.GenericDAO;
+import br.ufc.qxd.persistencia.trabalho_02_jpa.dao.GenericDAO;
 
 public class GenericJPADAO<T> implements GenericDAO<T> {
 	

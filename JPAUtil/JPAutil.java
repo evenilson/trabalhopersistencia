@@ -1,4 +1,4 @@
-package br.ufc.qxd.JPA;
+package br.ufc.qxd.persistencia.trabalho_02_jpa.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
