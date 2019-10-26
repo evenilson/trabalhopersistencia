@@ -27,7 +27,7 @@ public abstract class Funcionario {
 	private String sexo;
 	private Date dataAniversario;
 	private float salario;
-	//@ManyToMany(mappedBy="Funcionario")
+	@ManyToMany(mappedBy="Funcionario")
 	private Endereco endereco;
 	private int numeroDepartamento;
 	//@OneToMany(mappedBy="funcionario", fetch=FetchType.EAGER)
