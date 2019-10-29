@@ -2,25 +2,28 @@ package br.ufc.qxd.persistencia.trabalho_02_jpa.jpa.dao;
 
 import java.util.List;
 
+import br.ufc.qxd.persistencia.trabalho_02_jpa.JPAUtil.JPAutil;
 import br.ufc.qxd.persistencia.trabalho_02_jpa.dao.GenericDAO;
 
-public class GenericJPADAO<T> implements GenericDAO<T> {
+public abstract class GenericJPADAO<T> implements GenericDAO<T> {
 	
 	private Class<T> persistenceClass;
 	
+	
+	
 	public GenericJPADAO(Class<T> persistenceClass) {
-		this.persistenceClass = persistenceClass; 
+		this.persistenceClass = persistenceClass;
 	}
 
 	@Override
 	public void save(T entity) {
-		// TODO Auto-generated method stub
+		JPAutil.getEntityManager().merge(entity);
 		
 	}
 
 	@Override
 	public void delete(T entity) {
-		// TODO Auto-generated method stub
+		JPAutil.getEntityManager().remove(JPAutil.getEntityManager().merge(entity));
 		
 	}
 
@@ -65,6 +68,15 @@ public class GenericJPADAO<T> implements GenericDAO<T> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Class<T> getPersistenceClass() {
+		return persistenceClass;
+	}
+
+	public void setPersistenceClass(Class<T> persistenceClass) {
+		this.persistenceClass = persistenceClass;
+	}
+	
 	
 
 }

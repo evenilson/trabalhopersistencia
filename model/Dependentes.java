@@ -8,8 +8,10 @@ import javax.persistence.*;
 
 @Entity
 public class Dependentes {
+
 	@Id  
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="Dependentes_id")
 	private int idDep;
 	private String nomeDep;
 	private String sexo;
@@ -17,6 +19,8 @@ public class Dependentes {
 	private String grauDeParentesco;
 	
 	
+	@ManyToOne
+	@JoinColumn(name="funcionario_id")
 	private Funcionario funcionario;
 	
 	public Dependentes() {

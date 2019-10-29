@@ -2,22 +2,43 @@ package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class Projetos{
 
-//@Entity
-//@Table(name = "Projetos")
-public class Projetos {
-	
-	//@Id  
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id  
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="projeto_id")
 	private int idPro;
 	private String nome;
 	private String tempoDesenvolvimento;
-	//@ManyToMany(mappedBy = "projetos")
+
+	@ManyToMany
+	@JoinTable(
+			name="pesquisador_projeto",
+			joinColumns=
+			@JoinColumn(name="projeto_id", 
+			referencedColumnName="projeto_id"),
+			inverseJoinColumns =
+			@JoinColumn(name="pesquisador_id", 
+			referencedColumnName="funcionario_id")
+			)
 	private List<Pesquisador> pesquisador;
+	@ManyToOne
+	@JoinColumn(name="departamento_id")
+	private Departamento departamento;
 
 	public Projetos() {
-	
+
 	}
 
 	public Projetos(int idPro, String nome, String tempoDesenvolvimento, List<Pesquisador> pesquisador) {
@@ -25,6 +46,10 @@ public class Projetos {
 		this.nome = nome;
 		this.tempoDesenvolvimento = tempoDesenvolvimento;
 		this.pesquisador = pesquisador;
+	}
+
+	public Projetos(String nome, String tempoDesenvolvimento) {
+		this(0, nome, tempoDesenvolvimento, null);
 	}
 
 	public int getIdPro() {
@@ -65,7 +90,7 @@ public class Projetos {
 				+ ", pesquisador=" + pesquisador + "]";
 	}
 
-	
+
 
 
 

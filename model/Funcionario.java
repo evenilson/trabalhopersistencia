@@ -1,15 +1,8 @@
 package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
+
+
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 
 import javax.persistence.*;
 
@@ -19,53 +12,51 @@ import javax.persistence.*;
 	@NamedQuery(name="Funcionario.findAll", query="from Funcionario"),
 
 })
-public  class Funcionario implements Serializable {
-	 private static final long serialVersionUID = -1905907502453138175L;
+public class Funcionario{
+
+	/**
+	 * 
+	 */
 	@Id  
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="funcionario_id")
 	private int id;
 	private String nome;
 	private String sexo;
-	private Date dataAniversario;
+	private String dataAniversario;
 	private float salario;
-	@ManyToMany(mappedBy="Funcionario")
-	private Endereco endereco;
-	private int numeroDepartamento;
-	@OneToMany(mappedBy = "Funcionario", cascade = CascadeType.ALL)
+	@ManyToMany
+	private List<Endereco> enderecos;
+	
+	@ManyToOne
+	@JoinColumn(name="departamento_id")
+	private Departamento numeroDepartamento;
+	
+	@OneToMany(mappedBy="funcionario")
 	private List<Dependentes> dependentes;
 
 	public Funcionario() {
-		this.id = 0;
-		this.nome = null;
-		this.sexo = null;
-		this.dataAniversario = null;
-		this.salario = 0;
-		this.endereco = null;
-		this.numeroDepartamento = 0;
-		this.dependentes = null;
+
 	}
 
-	public Funcionario(int id, String nome, String sexo, Date dataAniversario, float salario, Endereco endereco,int numeroDepartamento, List<Dependentes> dependentes) {
+	
+
+	public Funcionario(int id, String nome, String sexo, String dataAniversario, float salario,
+			List<Endereco> enderecos, Departamento numeroDepartamento, List<Dependentes> dependentes) {
 		this.id = id;
 		this.nome = nome;
 		this.sexo = sexo;
 		this.dataAniversario = dataAniversario;
 		this.salario = salario;
-		this.endereco = endereco;
+		this.enderecos = enderecos;
 		this.numeroDepartamento = numeroDepartamento;
-		this.dependentes = new ArrayList<>();
-
+		this.dependentes = dependentes;
 	}
 
-	public Funcionario(int id, String nome, String sexo, float salario, Endereco endereco,int numeroDepartamento,List<Dependentes> dependentes ) {
-		this.id = id;
-		this.nome = nome;
-		this.sexo = sexo;
-		this.salario = salario;
-		this.endereco = endereco;
-		this.numeroDepartamento = numeroDepartamento;
-		this.dependentes = new ArrayList<>();
+
+
+	public Funcionario(String nome, String sexo, String dataAniversario, float salario) {
+		this(0,nome,sexo,dataAniversario,salario,null,null,null);
 	}
 
 	public int getId() {
@@ -92,11 +83,11 @@ public  class Funcionario implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public Date getDataAniversario() {
+	public String getDataAniversario() {
 		return dataAniversario;
 	}
 
-	public void setDataAniversario(Date dataAniversario) {
+	public void setDataAniversario(String dataAniversario) {
 		this.dataAniversario = dataAniversario;
 	}
 
@@ -107,20 +98,24 @@ public  class Funcionario implements Serializable {
 	public void setSalario(float salario) {
 		this.salario = salario;
 	}
-
-	public Endereco getEndereco() {
-		return endereco;
+	
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
-	public int getNumeroDepartamento() {
+
+
+	public Departamento getNumeroDepartamento() {
 		return numeroDepartamento;
 	}
 
-	public void setNumeroDepartamento(int numeroDepartamento) {
+	public void setNumeroDepartamento(Departamento numeroDepartamento) {
 		this.numeroDepartamento = numeroDepartamento;
 	}
 
@@ -135,11 +130,11 @@ public  class Funcionario implements Serializable {
 	@Override
 	public String toString() {
 		return "Funcionario [id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", dataAniversario=" + dataAniversario
-				+ ", salario=" + salario + ", endereco=" + endereco + ", numeroDepartamento=" + numeroDepartamento
+				+ ", salario=" + salario + ", enderecos=" + enderecos + ", numeroDepartamento=" + numeroDepartamento
 				+ ", dependentes=" + dependentes + "]";
 	}
-
-
+	
+	
 
 
 

@@ -1,36 +1,42 @@
 package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
-
-//@Table(name = "Pesquisador")
-
+@Entity
 public class Pesquisador extends Funcionario {
+
 	private String areaDeAtuacao;
 	private String horasTrabalhadas;
-
-	/*@ManyToMany(cascade = {
-			CascadeType.PERSIST,
-			CascadeType.MERGE
-	})
-	@JoinTable(name = "post_tag",
-	joinColumns = @JoinColumn(name = "pesq_id"),
-	inverseJoinColumns = @JoinColumn(name = "pro_id")
-			)*/
+	
+	@ManyToMany(mappedBy="pesquisador")
 	private List<Projetos> projetos;
 
 	public Pesquisador() {
 
 	}
 
-	public Pesquisador(int id, String nome, String sexo, Date dataAniversario, float salario, Endereco endereco,int numeroDepartamento, List<Dependentes> dependentes,String areaDeAtuacao, String horasTrabalhadas, List<Projetos> projetos) {
-		super(id, nome, sexo, dataAniversario, salario, endereco, numeroDepartamento,dependentes);
+	public Pesquisador(String areaDeAtuacao, String horasTrabalhadas, List<Projetos> projetos) {
 		this.areaDeAtuacao = areaDeAtuacao;
 		this.horasTrabalhadas = horasTrabalhadas;
 		this.projetos = projetos;
 	}
+
+	public Pesquisador(int id, String nome, String sexo, String dataAniversario, float salario, List<Endereco> endereco,
+			Departamento numeroDepartamento, List<Dependentes> dependentes, String areaDeAtuacao, String horasTrabalhadas, List<Projetos> projetos) {
+		super(id, nome, sexo, dataAniversario, salario, endereco, numeroDepartamento, dependentes);
+		this.areaDeAtuacao = areaDeAtuacao;
+		this.horasTrabalhadas = horasTrabalhadas;
+		this.projetos = projetos;
+	}
+
+	public Pesquisador(String nome, String sexo, String dataAniversario, float salario, String areaDeAtuacao, String horasTrabalhadas) {
+		this(0,nome, sexo, dataAniversario, salario,null,null, null, areaDeAtuacao, horasTrabalhadas, null);
+	}
+
+
 
 	public String getAreaDeAtuacao() {
 		return areaDeAtuacao;
@@ -60,7 +66,7 @@ public class Pesquisador extends Funcionario {
 	public String toString() {
 		return "Pesquisado  Nome:"+this.getNome()+ "Sexo: "+ this.getSexo()+ "Data de nascimento"+
 				this.getDataAniversario()+ "Salario"+ this.getSalario()+ "Endereço: "+this.getSalario()+
-				"Numero de departamento"+ this.getNumeroDepartamento()+ "Lista de dependentes"+ this.getDependentes() +
+				"Numero de departamento"+ this.getNumeroDepartamento()+ 
 				" Area De Atuacao: " + areaDeAtuacao + ", Horas Trabalhadas: " + horasTrabalhadas + ", Projetos:"
 				+ projetos ;
 	}
