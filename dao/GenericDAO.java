@@ -12,4 +12,5 @@ public interface GenericDAO<T> {
 	public void commit();
 	public void rollback();
 	public void close();
+	void deleteById(Integer id);
 }

@@ -1,81 +1,56 @@
 package br.ufc.qxd.persistencia.trabalho_02_jpa.exec;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
+import java.util.List;
+import java.util.Scanner;
 
+import br.ufc.qxd.persistencia.trabalho_02_jpa.controle.DepartamentoControle;
 import br.ufc.qxd.persistencia.trabalho_02_jpa.model.Departamento;
-import br.ufc.qxd.persistencia.trabalho_02_jpa.model.Projetos;
 
 
 public class Principal {
 
+	private static Scanner scanner;
+
 	public static void main(String[] args) {
+		scanner = new Scanner(System.in);
 		
-		InserirProjeto();
-		//InserirDepartamento();
-	}
+		//System.out.println("Informe o nome do departamento: ");
+		// inserir
+		//String nome = scanner.nextLine();
+		//DepartamentoControle.InserirDepartamento(nome);
+		
+		// remover
+		//int id = scanner.nextInt();
+		//DepartamentoControle.removerDepartamento(id);
+		
+		/* lista tudo
+		List<Departamento> departamentos = new DepartamentoControle().buscarTodosOsDepartamentos();
 
-	public static void InserirDepartamento() {
-		Departamento c = new Departamento("Jean");
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
+		for (Departamento departamento : departamentos) {
+			System.out.println(departamento);
+		}
+		*/
+		
+		/* lista por numero 
+		System.out.println("Informe o numero do departamento: ");
 
 		try {
-			tx.begin();
-			em.persist(c);
-			/*
-			em.persist(new Contato("Sting", "111"));
-			em.persist(new Contato("Ronier", "222"));
-			em.persist(new Contato("Lucas", "333"));
-			em.persist(new Contato("Wesley", "444"));
-			 */
-			tx.commit();
-		} catch(IllegalStateException | PersistenceException e) {
-			tx.rollback();
-			e.printStackTrace();
-		} finally {
-			em.close();
+			Integer numero = Integer.parseInt(scanner.nextLine());
+			Departamento departamento = new DepartamentoControle().buscarDepartamentoPorNumero(numero);
+
+			System.out.println(departamento);
+		} catch (NumberFormatException e) {
+			System.out.println("O numero informado não e valido!");
 		}
-
-
-		System.out.println("===========================================");
-
-		System.out.println(c);
+		*/
+		//System.out.println("Departamento salvo com sucesso");
+		
+		
+		
+		
 	}
 	
-	public static void InserirProjeto() {
-		Projetos c = new Projetos("PEP","60Dias");
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-
-		try {
-			tx.begin();
-			em.persist(c);
-			/*
-			em.persist(new Contato("Sting", "111"));
-			em.persist(new Contato("Ronier", "222"));
-			em.persist(new Contato("Lucas", "333"));
-			em.persist(new Contato("Wesley", "444"));
-			 */
-			tx.commit();
-		} catch(IllegalStateException | PersistenceException e) {
-			tx.rollback();
-			e.printStackTrace();
-		} finally {
-			em.close();
-		}
-
-
-		System.out.println("===========================================");
-
-		System.out.println(c);
-	}
-
+	
+	
+	
 }

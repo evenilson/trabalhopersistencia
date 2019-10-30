@@ -1,8 +1,5 @@
 package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
-
-import java.util.List;
-
 import javax.persistence.Entity;
 
 
@@ -19,15 +16,13 @@ public class Secretario extends Funcionario{
 		this.grauDeEscolaridade = grauDeEscolaridade;
 	}
 
-	public Secretario(int id, String nome, String sexo, String dataAniversario, float salario, List<Endereco> endereco,
-			Departamento numeroDepartamento, List<Dependentes> dependentes) {
-		super(id, nome, sexo, dataAniversario, salario, endereco, numeroDepartamento, dependentes);
+	public Secretario(String nome, String sexo, String dataAniversario, float salario, String grauDeEscolaridade) {
+		super(nome, sexo, dataAniversario, salario);
+		this.grauDeEscolaridade = grauDeEscolaridade;
 
 	}
 
-	public Secretario(String nome, String sexo, String dataAniversario, float salario) {
-		this(0,nome, sexo, dataAniversario, salario, null, null ,null);		
-	}
+
 
 	public String getGralDeEscolaridade() {
 		return grauDeEscolaridade;

@@ -6,12 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-
 @Entity
-@NamedQueries({
-	@NamedQuery(name="Funcionario.findAll", query="from Funcionario"),
-
-})
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Funcionario{
 
 	/**
@@ -126,6 +122,10 @@ public class Funcionario{
 	public void setDependentes(List<Dependentes> dependentes) {
 		this.dependentes = dependentes;
 	}
+	
+	public void addEndereco(Endereco endereco) {
+		enderecos.add(endereco);
+	}
 
 	@Override
 	public String toString() {
@@ -134,10 +134,4 @@ public class Funcionario{
 				+ ", dependentes=" + dependentes + "]";
 	}
 	
-	
-
-
-
-
-
 }

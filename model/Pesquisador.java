@@ -17,23 +17,11 @@ public class Pesquisador extends Funcionario {
 	public Pesquisador() {
 
 	}
-
-	public Pesquisador(String areaDeAtuacao, String horasTrabalhadas, List<Projetos> projetos) {
-		this.areaDeAtuacao = areaDeAtuacao;
-		this.horasTrabalhadas = horasTrabalhadas;
-		this.projetos = projetos;
-	}
-
-	public Pesquisador(int id, String nome, String sexo, String dataAniversario, float salario, List<Endereco> endereco,
-			Departamento numeroDepartamento, List<Dependentes> dependentes, String areaDeAtuacao, String horasTrabalhadas, List<Projetos> projetos) {
-		super(id, nome, sexo, dataAniversario, salario, endereco, numeroDepartamento, dependentes);
-		this.areaDeAtuacao = areaDeAtuacao;
-		this.horasTrabalhadas = horasTrabalhadas;
-		this.projetos = projetos;
-	}
-
+	
 	public Pesquisador(String nome, String sexo, String dataAniversario, float salario, String areaDeAtuacao, String horasTrabalhadas) {
-		this(0,nome, sexo, dataAniversario, salario,null,null, null, areaDeAtuacao, horasTrabalhadas, null);
+		super( nome, sexo, dataAniversario, salario);
+		this.areaDeAtuacao = areaDeAtuacao;
+		this.horasTrabalhadas = horasTrabalhadas;
 	}
 
 

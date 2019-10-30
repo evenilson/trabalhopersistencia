@@ -5,44 +5,54 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JPAutil {
-	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
-	private static ThreadLocal<EntityManager> ems = new ThreadLocal<EntityManager>();
+public class JPAUtil {
+
+	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("dev");
+
+	private static ThreadLocal<EntityManager> threadLocal = new ThreadLocal<EntityManager>();
 
 	public static EntityManager getEntityManager() {
-		EntityManager em = ems.get();
-		if(em == null) {
-			em = emf.createEntityManager();
-			ems.set(em);
+		EntityManager entityManager = threadLocal.get();
+
+		if (entityManager == null) {
+			entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+			threadLocal.set(entityManager);
 		}
-		return em;
+
+		return entityManager;
 	}
-	public static void closeEntityManager() {
-		EntityManager em = ems.get();
-		if(em != null) {
-			EntityTransaction tx = em.getTransaction();
-			if(tx.isActive()) {
-				tx.commit();
-			}
-			em.close();
-			ems.set(null);
-		}
-	}
+
 	public static void beginTransaction() {
 		getEntityManager().getTransaction().begin();
 	}
+
 	public static void commit() {
-		EntityTransaction tx = getEntityManager().getTransaction();
-		if(tx.isActive())
-			tx.commit();
-	}
-	public static void rollback() {
-		EntityTransaction tx = getEntityManager().getTransaction();
-		if(tx.isActive())
-			tx.rollback();
+		EntityTransaction entityTransaction = getEntityManager().getTransaction();
+
+		if (entityTransaction.isActive())
+			entityTransaction.commit();
 	}
 
-	public void close() {  
-	} 
+	public static void rollback() {
+		EntityTransaction entityTransaction = getEntityManager().getTransaction();
+
+		if (entityTransaction.isActive())
+			entityTransaction.rollback();
+	}
+
+	public static void closeEntityManager() {
+		EntityManager entityManager = threadLocal.get();
+
+		if (entityManager != null) {
+			EntityTransaction tx = entityManager.getTransaction();
+
+			if (tx.isActive()) {
+				tx.commit();
+			}
+
+			entityManager.close();
+			threadLocal.set(null);
+		}
+	}
 }
 

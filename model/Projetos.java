@@ -47,9 +47,18 @@ public class Projetos{
 		this.tempoDesenvolvimento = tempoDesenvolvimento;
 		this.pesquisador = pesquisador;
 	}
+	
+	public Projetos(int idPro, String nome, String tempoDesenvolvimento) {
+		this.idPro = idPro;
+		this.nome = nome;
+		this.tempoDesenvolvimento = tempoDesenvolvimento;
 
-	public Projetos(String nome, String tempoDesenvolvimento) {
-		this(0, nome, tempoDesenvolvimento, null);
+	}
+	
+	public Projetos(String nome, String tempoDesenvolvimento, Departamento departamento) {
+		this.nome = nome;
+		this.tempoDesenvolvimento = tempoDesenvolvimento;
+		this.departamento = departamento;
 	}
 
 	public int getIdPro() {

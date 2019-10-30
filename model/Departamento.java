@@ -7,19 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
+import org.hibernate.validator.NotNull;
 
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name = "Departamento.findAll", query ="from Departamento"),
-})public class Departamento {
+public class Departamento {
 	@Id  
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="departamento_id")
 	private int idDepa;
+	
+	@NotNull
 	private String nome;
 	
 	
@@ -34,15 +34,17 @@ import javax.persistence.OneToMany;
 		
 	}
 
-	public Departamento(int idDepa, String nome, List<Funcionario> funcionarios, List<Projetos> projetos) {
-		super();
+	public Departamento(int idDepa) {
+		this.idDepa = idDepa;
+	}
+
+	public Departamento(String nome) {
+		this.nome = nome;
+	}
+
+	public Departamento(int idDepa, String nome) {
 		this.idDepa = idDepa;
 		this.nome = nome;
-		this.funcionarios = funcionarios;
-		this.projetos = projetos;
-	}
-	public Departamento(String nome) {
-		this(0,nome,null,null);
 	}
 
 	public int getIdDepa() {
@@ -61,27 +63,12 @@ import javax.persistence.OneToMany;
 		this.nome = nome;
 	}
 
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
-	}
-
-	public void setFuncionarios(List<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
-	}
-
-	public List<Projetos> getProjetos() {
-		return projetos;
-	}
-
-	public void setProjetos(List<Projetos> projetos) {
-		this.projetos = projetos;
-	}
-
 	@Override
 	public String toString() {
-		return "Departamento [idDepa=" + idDepa + ", nome=" + nome + ", funcionarios=" + funcionarios + ", projetos="
-				+ projetos + "]";
+		return "Departamento [idDepa=" + idDepa + ", nome=" + nome + "]";
 	}
+	
+	
 	
 	
 	

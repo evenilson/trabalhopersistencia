@@ -54,12 +54,17 @@ public class Endereco {
 		this.estado = estado;
 		Funcionario = funcionario;
 	}
+	
+	public Endereco( String rua, int numeroCasa, String cidade, String bairro, String estado) {
+		super();
+		this.rua = rua;
+		this.numeroCasa = numeroCasa;
+		this.cidade = cidade;
+		this.bairro = bairro;
+		this.estado = estado;
 
-
-
-	public Endereco(String rua, int numeroCasa, String cidade, String bairro, String estado) {
-		this(0, rua, numeroCasa, cidade, bairro, estado, null);
 	}
+
 
 	public int getId() {
 		return id;

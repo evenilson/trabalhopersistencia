@@ -1,7 +1,5 @@
 package br.ufc.qxd.persistencia.trabalho_02_jpa.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 
 @Entity
@@ -13,15 +11,10 @@ public class Limpeza extends Funcionario {
 
 	}
 	
-	public Limpeza(int id, String nome, String sexo, String dataAniversario, float salario, List<Endereco> endereco,
-			Departamento numeroDepartamento, List<Dependentes> dependentes, String cargo, int jornadaDeTrabalho) {
-		super(id, nome, sexo, dataAniversario, salario, endereco, numeroDepartamento, dependentes);
+	public Limpeza(String nome, String sexo, String dataAniversario, float salario, String cargo, int jornadaDeTrabalho) {
+		super(nome, sexo, dataAniversario, salario);
 		this.cargo = cargo;
 		this.jornadaDeTrabalho = jornadaDeTrabalho;
-	}
-
-	public Limpeza(String nome, String sexo, String dataAniversario, float salario, String cargo, int jornadaDeTrabalho) {
-		this(0, nome, sexo, dataAniversario, salario, null, null,null, cargo, jornadaDeTrabalho);
 	}
 
 
